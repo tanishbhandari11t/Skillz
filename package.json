@@ -1,0 +1,191 @@
+{
+  "name": "skillz",
+  "displayName": "Skillz",
+  "description": "Create, manage, discover and apply AI coding skills inside your editor",
+  "version": "0.1.0",
+  "publisher": "skillz",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Snippets"
+  ],
+  "keywords": [
+    "skills",
+    "ai",
+    "agent",
+    "cursor",
+    "prompt",
+    "skillz"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "icon": "media/skillz-icon.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "skillz",
+          "title": "Skillz",
+          "icon": "media/skillz-activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "skillz": [
+        {
+          "type": "webview",
+          "id": "skillz.sidebar",
+          "name": "Skillz"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "skillz.createSkill",
+        "title": "Create Skill",
+        "category": "Skillz",
+        "icon": "$(add)"
+      },
+      {
+        "command": "skillz.applySkills",
+        "title": "Apply Skills",
+        "category": "Skillz",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "skillz.findSkills",
+        "title": "Find Skills",
+        "category": "Skillz",
+        "icon": "$(search)"
+      },
+      {
+        "command": "skillz.refreshSkills",
+        "title": "Refresh Skills",
+        "category": "Skillz",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "skillz.matchTask",
+        "title": "Match Skills to Task",
+        "category": "Skillz"
+      },
+      {
+        "command": "skillz.openSkill",
+        "title": "Open Skill",
+        "category": "Skillz"
+      },
+      {
+        "command": "skillz.deleteSkill",
+        "title": "Delete Skill",
+        "category": "Skillz"
+      },
+      {
+        "command": "skillz.openSettings",
+        "title": "Open Settings",
+        "category": "Skillz"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "skillz.createSkill",
+          "when": "view == skillz.sidebar",
+          "group": "navigation@1"
+        },
+        {
+          "command": "skillz.applySkills",
+          "when": "view == skillz.sidebar",
+          "group": "navigation@2"
+        },
+        {
+          "command": "skillz.refreshSkills",
+          "when": "view == skillz.sidebar",
+          "group": "navigation@3"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "skillz.openSkill",
+          "when": "false"
+        },
+        {
+          "command": "skillz.deleteSkill",
+          "when": "false"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Skillz",
+      "properties": {
+        "skillz.defaultScope": {
+          "type": "string",
+          "enum": [
+            "workspace",
+            "global"
+          ],
+          "default": "workspace",
+          "description": "Default save location for new skills"
+        },
+        "skillz.workspacePath": {
+          "type": "string",
+          "default": ".agents/skills",
+          "description": "Relative workspace path for skills (Agent Skills compatible)"
+        },
+        "skillz.alsoWriteCursorPath": {
+          "type": "boolean",
+          "default": false,
+          "description": "Also write workspace skills to .cursor/skills for Cursor-specific discovery"
+        },
+        "skillz.autoSuggest": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show keyword-based skill suggestions"
+        },
+        "skillz.minMatchScore": {
+          "type": "number",
+          "default": 4,
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Minimum score required to suggest a skill"
+        },
+        "skillz.askBeforeOverwrite": {
+          "type": "boolean",
+          "default": true,
+          "description": "Confirm before overwriting an existing skill"
+        },
+        "skillz.globalTarget": {
+          "type": "string",
+          "enum": [
+            "cursor",
+            "antigravity",
+            "both"
+          ],
+          "default": "cursor",
+          "description": "Where to install global skills"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "unit": "tsc -p ./ && node --test out/test/validator.test.js out/test/generator.test.js out/test/matcher.test.js",
+    "smoke": "npm run compile && node scripts/smoke-test.mjs",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.32.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {}
+}
