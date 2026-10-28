@@ -3,7 +3,16 @@
   "displayName": "Skillz",
   "description": "Create, manage, discover and apply AI coding skills inside your editor",
   "version": "0.1.0",
-  "publisher": "skillz",
+  "publisher": "tanishbhandari24",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanishbhandari11t/Skillz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tanishbhandari11t/Skillz/issues"
+  },
+  "homepage": "https://github.com/tanishbhandari11t/Skillz#readme",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },

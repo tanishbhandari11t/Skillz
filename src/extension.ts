@@ -36,7 +36,7 @@ export function activate(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand("skillz.openSettings", () => {
       void vscode.commands.executeCommand(
         "workbench.action.openSettings",
-        "@ext:skillz.skillz"
+        "@ext:tanishbhandari24.skillz"
       );
     }),
     vscode.commands.registerCommand("skillz.openSkill", async (name?: string) => {
